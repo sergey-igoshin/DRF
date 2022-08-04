@@ -1,5 +1,5 @@
-from django.db import models
 from django.contrib.auth.validators import ASCIIUsernameValidator
+from django.db import models
 
 
 class User(models.Model):
@@ -27,10 +27,7 @@ class User(models.Model):
     is_active = models.BooleanField(
         ("active"),
         default=True,
-        help_text=(
-            "Пользователь активный"
-        ),
+        help_text=("Пользователь активный"),
     )
     created = models.DateTimeField(auto_now_add=True, verbose_name="Created", editable=False)
     updated = models.DateTimeField(auto_now=True, verbose_name="Edited", editable=False)
-

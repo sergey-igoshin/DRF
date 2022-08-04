@@ -8,21 +8,41 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='User',
+            name="User",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('username', models.CharField(error_messages={'unique': 'Пользователь с таким именем уже существует.'}, help_text='Только латиница, цифры и спец символы.', max_length=150, unique=True, validators=[django.contrib.auth.validators.ASCIIUsernameValidator()], verbose_name='username')),
-                ('first_name', models.CharField(max_length=150, verbose_name='first name')),
-                ('last_name', models.CharField(max_length=150, verbose_name='last name')),
-                ('email', models.CharField(error_messages={'unique': 'Пользователь с таким email уже существует.'}, max_length=256, unique=True, verbose_name='email address')),
-                ('is_active', models.BooleanField(default=True, help_text='Пользователь активный', verbose_name='active')),
-                ('created', models.DateTimeField(auto_now_add=True, verbose_name='Created')),
-                ('updated', models.DateTimeField(auto_now=True, verbose_name='Edited')),
+                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                (
+                    "username",
+                    models.CharField(
+                        error_messages={"unique": "Пользователь с таким именем уже существует."},
+                        help_text="Только латиница, цифры и спец символы.",
+                        max_length=150,
+                        unique=True,
+                        validators=[django.contrib.auth.validators.ASCIIUsernameValidator()],
+                        verbose_name="username",
+                    ),
+                ),
+                ("first_name", models.CharField(max_length=150, verbose_name="first name")),
+                ("last_name", models.CharField(max_length=150, verbose_name="last name")),
+                (
+                    "email",
+                    models.CharField(
+                        error_messages={"unique": "Пользователь с таким email уже существует."},
+                        max_length=256,
+                        unique=True,
+                        verbose_name="email address",
+                    ),
+                ),
+                (
+                    "is_active",
+                    models.BooleanField(default=True, help_text="Пользователь активный", verbose_name="active"),
+                ),
+                ("created", models.DateTimeField(auto_now_add=True, verbose_name="Created")),
+                ("updated", models.DateTimeField(auto_now=True, verbose_name="Edited")),
             ],
         ),
     ]
