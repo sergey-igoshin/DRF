@@ -10,8 +10,10 @@
 - djangorestframework-3.13
 - markdown-3.4
 - django-filter-22.1
+- django-cors-headers-3.13
 - VSCode
 - SQLite 3
+- Node.js
 
 ## Лицензия
 
