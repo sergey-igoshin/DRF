@@ -5,6 +5,15 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Node",
+            "program": "frontend/App.js",
+            "request": "launch",
+            "skipFiles": [
+                "0.0.0.0:3000"
+            ],
+            "type": "node"
+        },
+        {
             "name": "Django",
             "type": "python",
             "request": "launch",
