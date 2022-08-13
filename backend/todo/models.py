@@ -14,10 +14,10 @@ class User(models.Model):
             "unique": ("Пользователь с таким именем уже существует."),
         },
     )
-    first_name = models.CharField(("first name"), max_length=150)
-    last_name = models.CharField(("last name"), max_length=150)
+    first_name = models.CharField(("Имя"), max_length=150)
+    last_name = models.CharField(("Фамилия"), max_length=150)
     email = models.CharField(
-        ("email address"),
+        ("Email"),
         max_length=256,
         unique=True,
         error_messages={
@@ -25,9 +25,39 @@ class User(models.Model):
         },
     )
     is_active = models.BooleanField(
-        ("active"),
+        ("Активировать пользователя"),
         default=True,
-        help_text=("Пользователь активный"),
     )
     created = models.DateTimeField(auto_now_add=True, verbose_name="Created", editable=False)
     updated = models.DateTimeField(auto_now=True, verbose_name="Edited", editable=False)
+    
+    def __str__(self) -> str:
+        return f'{self.first_name} {self.last_name}'
+
+
+class Projects(models.Model):
+    url_repo = models.URLField(("Url репозиторий"), unique=True)
+    title = models.CharField(("Название проекта"), max_length=256)
+    description = models.CharField(("Описание проекта"), max_length=1024)
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Created", editable=False)
+    updated = models.DateTimeField(auto_now=True, verbose_name="Edited", editable=False)
+    project_is_completed = models.BooleanField(("Завершить проект"), default=False)
+    user = models.ManyToManyField(User)    
+    
+    def __str__(self) -> str:
+        return f"{self.pk} {self.title}"
+
+    def delete(self, *args):
+        self.project_is_completed = True
+        self.save()
+
+
+class ToDo(models.Model):
+    project = models.ForeignKey(Projects, on_delete=models.CASCADE)
+    comment = models.TextField(("Комментарий"), blank=True, null=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Created", editable=False)
+    updated = models.DateTimeField(auto_now=True, verbose_name="Edited", editable=False)
+    
+    def __str__(self) -> str:
+        return f"{self.project.title} {self.user.first_name} {self.user.last_name}"   
