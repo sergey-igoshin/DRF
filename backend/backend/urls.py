@@ -17,12 +17,20 @@ from django.contrib import admin
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 
-from todo.views import UserModelViewSet
+from todo.views import UserModelViewSet, user_get, user_post, project_get, ProjectModelViewSet, ToDoModelViewSet
 
 router = DefaultRouter()
-router.register("user", UserModelViewSet)
+router.register("users", UserModelViewSet)
+router.register("projects", ProjectModelViewSet)
+router.register("todos", ToDoModelViewSet)
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api-auth/", include("rest_framework.urls")),
     path("api/", include(router.urls)),
+    path("user_get/", user_get),
+    path("user_get/<int:pk>", user_get),
+    path("user_post/", user_post),
+    path("user_post/<int:pk>", user_post),
+    path("project_get/", project_get),
+    path("project_get/<int:pk>", project_get),
 ]
