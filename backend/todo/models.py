@@ -45,7 +45,7 @@ class Projects(models.Model):
     user = models.ManyToManyField(User)    
     
     def __str__(self) -> str:
-        return f"{self.pk} {self.title}"
+        return f"{self.title}"
 
     def delete(self, *args):
         self.project_is_completed = True
@@ -58,6 +58,11 @@ class ToDo(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True, verbose_name="Created", editable=False)
     updated = models.DateTimeField(auto_now=True, verbose_name="Edited", editable=False)
+    todo_is_completed = models.BooleanField(("Завершить"), default=False)
     
     def __str__(self) -> str:
-        return f"{self.project.title} {self.user.first_name} {self.user.last_name}"   
+        return f"{self.project.title} {self.user.first_name} {self.user.last_name}"  
+
+    def delete(self, *args):
+        self.todo_is_completed = True
+        self.save() 
