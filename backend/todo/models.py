@@ -53,10 +53,9 @@ class Projects(models.Model):
 
 
 class ToDo(models.Model):
-    project = models.ForeignKey(Projects, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     comment = models.TextField(("Комментарий"), blank=True, null=True)
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    created = models.DateTimeField(auto_now_add=True, verbose_name="Created", editable=False)
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Created", editable=False)
     updated = models.DateTimeField(auto_now=True, verbose_name="Edited", editable=False)
     todo_is_completed = models.BooleanField(("Завершить"), default=False)
     

@@ -15,14 +15,6 @@ from django.shortcuts import get_object_or_404
 from rest_framework import mixins
 from rest_framework.pagination import LimitOffsetPagination
 
-# модель User: есть возможность просмотра списка и каждого пользователя в
-# отдельности, можно вносить изменения, нельзя удалять и создавать;
-# ● модель Project: доступны все варианты запросов; для постраничного вывода
-# установить размер страницы 10 записей; добавить фильтрацию по совпадению части
-# названия проекта;
-# ● модель ToDo: доступны все варианты запросов; при удалении не удалять ToDo, а
-# выставлять признак, что оно закрыто; добавить фильтрацию по проекту; для
-# постраничного вывода установить размер страницы 20.
 
 class ProjectLimitOffsetPagination(LimitOffsetPagination):
     default_limit = 10
