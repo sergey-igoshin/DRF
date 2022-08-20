@@ -21,7 +21,7 @@ const UserItem = ({user}) => {
 
 const UserList = ({users}) => {
     return (
-        <table>
+        <table className='table'>
             <th>
                 Nik
             </th>
