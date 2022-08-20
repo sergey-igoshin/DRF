@@ -5,19 +5,36 @@ const options = {
     day: 'numeric',
     month: 'numeric',
     year: 'numeric',
-    hour: 'numeric',
-    minute: 'numeric',
-    second: 'numeric'
-  }
+}
   
-  function getDate(str) {
+function getDate(str) {
     var date = new Date(str);
     return date.toLocaleString('ru', options)
-  }
+}
+
+function get_params(str, users){
+    var res = str.map(function (ID) {
+        return users.find(function (a) {
+            return a.id == ID;
+        }).last_name;
+    })
+    return res
+}
+
+function status(bool){
+    if (bool){
+        return 'Завершена'        
+    }else{
+        return 'В работе'
+    }
+}
 
 const ProjectItem = ({project, users}) => {
     return (
         <tr>
+            <td>
+                {getDate([project.created])}
+            </td>
             <td>
                 <Link to={`/projects/${project.id}`}>{project.title}</Link>
             </td>
@@ -25,36 +42,40 @@ const ProjectItem = ({project, users}) => {
                 {project.description}
             </td>
             <td>
-                {project.url_repo}
+                <a href={project.url_repo}>{project.url_repo}</a>
             </td>
             <td>
-                {project.user.map(id => users.find(a => a.id == id).last_name)}
-            </td>
+                {/* {project.user.map(ID => user[0].find(a => a.id == ID).last_name)} */}
+                {get_params(project.user, users)}
+            </td>  
             <td>
-                {getDate(project.created)}
-            </td>
+                <input type="checkbox" checked={project.project_is_completed} /> { status(project.project_is_completed)}              
+            </td>          
         </tr>
     )
 }
 
 const ProjectList = ({projects, users}) => {
     return (
-        <table>
-            <th>
-                Название проекта
-            </th>
-            <th>
-                Описание проекта
-            </th>
-            <th>
-                Url репозиторий
-            </th>
-            <th>
-                Создал проект
-            </th>
+        <table className='table'>
             <th>
                 Дата
             </th>
+            <th>
+                Название
+            </th>
+            <th>
+                Описание
+            </th>
+            <th>
+                Репозиторий
+            </th>
+            <th>
+                Создал
+            </th>   
+            <th>
+                Статус
+            </th>           
             {projects.map((project) => <ProjectItem project={project} users={users}/>)}
         </table>
     )
