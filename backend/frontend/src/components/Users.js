@@ -15,6 +15,9 @@ const UserItem = ({user}) => {
             <td>
                 {user.email}
             </td>
+            <td>
+                <input type="checkbox" checked={user.is_active} /> {user.is_active? 'Активен': 'Не активен'}
+            </td>
         </tr>
     )
 }
@@ -33,6 +36,9 @@ const UserList = ({users}) => {
             </th>
             <th>
                 Email
+            </th>
+            <th>
+                Статус
             </th>
             {users.map((user) => <UserItem user={user} />)}
         </table>
