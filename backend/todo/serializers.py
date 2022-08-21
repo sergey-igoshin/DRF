@@ -1,4 +1,4 @@
-from rest_framework.serializers import ModelSerializer, Serializer, CharField, BooleanField
+from rest_framework.serializers import BooleanField, CharField, ModelSerializer, Serializer
 from .models import User, Projects, ToDo
 
 
@@ -30,7 +30,7 @@ class UserModelSerializer(ModelSerializer):
         fields = "__all__"
 
 
-class ToDoModelSerializer(ModelSerializer):
+class ToDoModelSerializer(ModelSerializer):    
     class Meta:
         model = ToDo
         fields = "__all__"

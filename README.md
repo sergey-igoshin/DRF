@@ -14,6 +14,7 @@
 - VSCode
 - SQLite 3
 - Node.js
+- react-router-dom-6.3.0
 
 ## Лицензия
 
