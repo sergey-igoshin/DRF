@@ -47,7 +47,8 @@ const ToDoItem = ({todo, users}) => {
                 {get_params([todo.user], users)}
             </td>   
             <td>
-                <input type="checkbox" checked={todo.todo_is_completed} /> {status(todo.todo_is_completed)}              
+                {/* <input type="checkbox" checked={todo.todo_is_completed} /> {status(todo.todo_is_completed)}*/}
+                <input type="checkbox" checked={todo.todo_is_completed} /> {todo.todo_is_completed? 'Завершена': 'В работе'}
             </td>          
         </tr>
     )
