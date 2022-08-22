@@ -16,9 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
-
+from rest_framework.authtoken import views
 from todo.views import ProjectModelViewSet, ProjectsCustomViewSet, ToDoModelViewSet, UserModelViewSet, project_get, user_get, user_post
-from todo import views
+# from todo import views
 
 
 router = DefaultRouter()
@@ -31,6 +31,7 @@ router.register("todos", ToDoModelViewSet)
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api-auth/", include("rest_framework.urls")),
+    path('api-auth-token/', views.obtain_auth_token),
     path("api/", include(router.urls)),
     path("user_get/", user_get),
     path("user_get/<int:pk>", user_get),
@@ -38,9 +39,8 @@ urlpatterns = [
     path("user_post/<int:pk>", user_post),
     path("project_get/", project_get),
     path("project_get/<int:pk>", project_get),
-    path('views/api-view/users/', views.UserAPIVIew.as_view()),
-    path('views/api-view/projects/', views.ProjectAPIVIew.as_view()),
-
+    # path('views/api-view/users/', views.UserAPIVIew.as_view()),
+    # path('views/api-view/projects/', views.ProjectAPIVIew.as_view()),
     path('project_api_view_set/', ProjectsCustomViewSet.as_view({'get': 'list'})),
     path('project_api_view_set/<int:pk>', ProjectsCustomViewSet.as_view({'get': 'retrieve'})),
     path('project_api_view_set/kwargs/<str:title>', ProjectModelViewSet.as_view({'get': 'list'})),
