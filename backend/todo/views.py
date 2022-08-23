@@ -14,6 +14,7 @@ from rest_framework import viewsets
 from django.shortcuts import get_object_or_404
 from rest_framework import mixins
 from rest_framework.pagination import LimitOffsetPagination
+from rest_framework.permissions import DjangoModelPermissions
 
 
 class ProjectLimitOffsetPagination(LimitOffsetPagination):
@@ -69,6 +70,7 @@ class UserModelViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     # renderer_classes = [JSONRenderer]
     serializer_class = UserModelSerializer
+    permission_classes = [DjangoModelPermissions]
 
 
 def user_get(request, pk=None):
@@ -122,6 +124,7 @@ class ProjectModelViewSet(ModelViewSet):
     queryset = Projects.objects.all()
     serializer_class = ProjectModelSerializer
     pagination_class = ProjectLimitOffsetPagination
+    permission_classes = [DjangoModelPermissions]
 
     @action(detail=True, methods=['get'])
     def get_project_title(self, request, pk=None):
@@ -139,3 +142,4 @@ class ToDoModelViewSet(ModelViewSet):
     queryset = ToDo.objects.all()
     serializer_class = ToDoModelSerializer
     pagination_class = ToDoLimitOffsetPagination
+    permission_classes = [DjangoModelPermissions]

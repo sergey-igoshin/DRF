@@ -21,14 +21,6 @@ function get_params(str, users){
     return res
 }
 
-function status(bool){
-    if (bool){
-        return 'Завершена'        
-    }else{
-        return 'В работе'
-    }
-}
-
 const ProjectItem = ({project, users}) => {
     return (
         <tr>
@@ -49,7 +41,7 @@ const ProjectItem = ({project, users}) => {
                 {get_params(project.user, users)}
             </td>  
             <td>
-                <input type="checkbox" checked={project.project_is_completed} /> { status(project.project_is_completed)}              
+                <input type="checkbox" checked={project.project_is_completed} /> {project.project_is_completed? 'Завершен': 'В работе'}
             </td>          
         </tr>
     )
