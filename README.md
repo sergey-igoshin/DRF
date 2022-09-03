@@ -15,6 +15,7 @@
 - SQLite 3
 - Node.js
 - react-router-dom-6.3.0
+- mixer-7.2.2
 
 ## Лицензия
 
