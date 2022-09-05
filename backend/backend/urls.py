@@ -1,7 +1,19 @@
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import include, path, re_path
 from rest_framework.authtoken import views
 from todo.views import *
+from drf_yasg.views import get_schema_view
+from drf_yasg.openapi import Info, License, Contact
+
+schema_view = get_schema_view(
+    Info(
+        title='ToDo',
+        default_version='v1',
+        description='description',
+        license=License(name='MIT'),
+        contact=Contact(email='sergey@csb-mirena.ru')
+    )
+)
 
 
 urlpatterns = [
@@ -21,4 +33,6 @@ urlpatterns = [
     path('project_api_view_set/', ProjectsCustomViewSet.as_view({'get': 'list'})),
     path('project_api_view_set/<int:pk>', ProjectsCustomViewSet.as_view({'get': 'retrieve'})),
     path('project_api_view_set/kwargs/<str:title>', ProjectModelViewSet.as_view({'get': 'list'})),
+    path('swagger', schema_view.with_ui()),
+    re_path(r'swagger(?P<format>\.json|\.yaml)', schema_view.without_ui()),
 ]
