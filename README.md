@@ -16,6 +16,7 @@
 - Node.js
 - react-router-dom-6.3.0
 - mixer-7.2.2
+- drf_yasg-1.21.3
 
 ## Лицензия
 

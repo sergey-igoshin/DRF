@@ -16,7 +16,13 @@ const UserItem = ({user}) => {
                 {user.email}
             </td>
             <td>
-                <input type="checkbox" checked={user.is_active} /> {user.is_active? 'Активен': 'Не активен'}
+                {/* <input type="checkbox" checked={user.is_active} /> {user.is_active? 'Активен': 'Не активен'} */}
+                <div>
+                    <input type="checkbox" checked={user.is_superuser} /> Администратор
+                </div>
+                <div>
+                    <input type="checkbox" checked={user.is_staff} /> Персонал
+                </div>
             </td>
         </tr>
     )

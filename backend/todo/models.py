@@ -28,6 +28,14 @@ class User(models.Model):
         ("Активировать пользователя"),
         default=True,
     )
+    is_superuser = models.BooleanField(
+        ("Администратор"),
+        default=False,
+    )
+    is_staff = models.BooleanField(
+        ("Персонал"),
+        default=False,
+    )
     created = models.DateTimeField(auto_now_add=True, verbose_name="Created", editable=False)
     updated = models.DateTimeField(auto_now=True, verbose_name="Edited", editable=False)
     

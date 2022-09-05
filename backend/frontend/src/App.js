@@ -66,7 +66,8 @@ class App extends React.Component {
   getHeaders(){
     if (this.isAuth()){
       return {
-        'Authorization': 'Token ' + this.state.token
+        'Authorization': 'Token ' + this.state.token,
+        'Accept': 'application/json; version=v2',
       }
     }
     return {}
