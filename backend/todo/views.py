@@ -5,7 +5,7 @@ from rest_framework.renderers import JSONRenderer, BrowsableAPIRenderer
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.parsers import JSONParser
 from .models import User, Projects, ToDo
-from .serializers import UserModelSerializer, UserSerializer, ProjectModelSerializer, ProjectSerializer, ToDoModelSerializer
+from .serializers import UserModelSerializer, UserModelSerializerVersion2, UserSerializer, ProjectModelSerializer, ProjectSerializer, ToDoModelSerializer
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import action
 from rest_framework.views import APIView
@@ -69,8 +69,13 @@ class ProjectAPIVIew(APIView):
 class UserModelViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     # renderer_classes = [JSONRenderer]
-    serializer_class = UserModelSerializer
+    # serializer_class = UserModelSerializer
     permission_classes = [DjangoModelPermissions]
+
+    def get_serializer_class(self):
+        if self.request.version == 'v2':
+            return UserModelSerializerVersion2
+        return UserModelSerializer
 
 
 def user_get(request, pk=None):

@@ -8,6 +8,8 @@ class UserSerializer(Serializer):
     last_name = CharField(max_length=150)
     email = CharField(max_length=256)
     is_active = BooleanField()
+    is_superuser = BooleanField()
+    is_staff = BooleanField()
 
     def update(self, instance, validated_data):
         instance.username = validated_data.get("username", instance.username)
@@ -15,6 +17,8 @@ class UserSerializer(Serializer):
         instance.last_name = validated_data.get("last_name", instance.last_name)
         instance.email = validated_data.get("email", instance.email)
         instance.is_active = validated_data.get("is_active", instance.is_active)
+        instance.is_superuser = validated_data.get("is_superuser", instance.is_superuser)
+        instance.is_staff = validated_data.get("is_staff", instance.is_staff)        
         instance.save()
         return instance
 
@@ -27,7 +31,14 @@ class UserSerializer(Serializer):
 class UserModelSerializer(ModelSerializer):
     class Meta:
         model = User
-        fields = "__all__"
+        # fields = "__all__"
+        exclude = ['is_superuser', 'is_staff']
+
+
+class UserModelSerializerVersion2(ModelSerializer):
+    class Meta:
+        model = User
+        exclude = ['is_active']        
 
 
 class ToDoModelSerializer(ModelSerializer):    
