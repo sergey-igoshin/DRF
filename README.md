@@ -17,7 +17,26 @@
 - react-router-dom-6.3.0
 - mixer-7.2.2
 - drf_yasg-1.21.3
+- graphene_django-2.15.0
 
 ## Лицензия
 
 MIT
+
+## Виртуальное окружение
+
+  ```bash
+  sudo python3 -m pip uninstall virtualenv && sudo 
+  ```
+  ```bash
+  python3 -m pip install -U virtualenv
+  ```
+  ```bash
+  source ./venv/bin/activate
+  ```
+
+## Устанавливаем зависимости
+  ```bash
+  pip install -r requirements.txt
+  ```
+  
