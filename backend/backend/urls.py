@@ -4,6 +4,7 @@ from rest_framework.authtoken import views
 from todo.views import *
 from drf_yasg.views import get_schema_view
 from drf_yasg.openapi import Info, License, Contact
+from graphene_django.views import GraphQLView
 
 schema_view = get_schema_view(
     Info(
@@ -35,4 +36,5 @@ urlpatterns = [
     path('project_api_view_set/kwargs/<str:title>', ProjectModelViewSet.as_view({'get': 'list'})),
     path('swagger', schema_view.with_ui()),
     re_path(r'swagger(?P<format>\.json|\.yaml)', schema_view.without_ui()),
+    path("graphql/", GraphQLView.as_view(graphiql=True)),
 ]

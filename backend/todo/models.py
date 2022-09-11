@@ -68,7 +68,7 @@ class ToDo(models.Model):
     todo_is_completed = models.BooleanField(("Завершить"), default=False)
     
     def __str__(self) -> str:
-        return f"{self.project.title} {self.user.first_name} {self.user.last_name}"  
+        return f"{self.user.first_name} {self.user.last_name}"  
 
     def delete(self, *args):
         self.todo_is_completed = True
