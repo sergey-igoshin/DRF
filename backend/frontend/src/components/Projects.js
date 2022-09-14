@@ -15,15 +15,18 @@ function getDate(str) {
 function get_params(str, users){
     var res = str.map(function (ID) {
         return users.find(function (a) {
-            return a.id == ID;
+            return a.id === ID;
         }).last_name;
     })
     return res
 }
 
-const ProjectItem = ({project, users}) => {
+const ProjectItem = ({project, users, completedChange}) => {
     return (
         <tr>
+            <td>
+                <input type="checkbox" name="project_is_completed" checked={project.project_is_completed} onChange={(e) => completedChange('projects', project.id, e)}/>
+            </td>
             <td>
                 {getDate([project.created])}
             </td>
@@ -37,19 +40,20 @@ const ProjectItem = ({project, users}) => {
                 <a href={project.url_repo}>{project.url_repo}</a>
             </td>
             <td>
-                {/* {project.user.map(ID => user[0].find(a => a.id == ID).last_name)} */}
                 {get_params(project.user, users)}
             </td>  
             <td>
-                <input type="checkbox" checked={project.project_is_completed} /> {project.project_is_completed? 'Завершен': 'В работе'}
-            </td>          
+                {project.project_is_completed? 'Завершен': 'В работе'}
+            </td>
         </tr>
     )
 }
 
-const ProjectList = ({projects, users}) => {
+const ProjectList = ({projects, users, completedChange}) => {
     return (
         <table className='table'>
+            <th>                
+            </th>
             <th>
                 Дата
             </th>
@@ -67,8 +71,9 @@ const ProjectList = ({projects, users}) => {
             </th>   
             <th>
                 Статус
-            </th>           
-            {projects.map((project) => <ProjectItem project={project} users={users}/>)}
+            </th>
+            
+            {projects.map((project) => <ProjectItem project={project} users={users} completedChange={completedChange}/>)}
         </table>
     )
 }

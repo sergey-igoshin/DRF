@@ -1,5 +1,4 @@
 import React from 'react'
-// import {useParams} from 'react-router-dom'
 
 const options = {
     day: 'numeric',
@@ -18,16 +17,19 @@ function getDate(str) {
 function get_params(str, users){
     var res = str.map(function (ID) {
         return users.find(function (a) {
-            return a.id == ID;
+            return a.id === ID;
         }).last_name;
     })
     return res
 }
 
-const ToDoItem = ({todo, users}) => {   
+const ToDoItem = ({todo, users, completedChange}) => {   
     
     return (
         <tr>
+            <td>
+                <input type="checkbox" name="todo_is_completed" checked={todo.todo_is_completed} onChange={(e) => completedChange('todos', todo.id, e)}/>
+            </td>
             <td>
                 {getDate(todo.created_at)}
             </td>
@@ -35,20 +37,21 @@ const ToDoItem = ({todo, users}) => {
                 {todo.comment}
             </td>
             <td>
-                {/* {[todo.user].map(ID => user[0].find(a => a.id == ID).last_name)} */}
                 {get_params([todo.user], users)}
             </td>   
             <td>
-                <input type="checkbox" checked={todo.todo_is_completed} /> {todo.todo_is_completed? 'Завершить': 'В работе'}              
-            </td>          
+                {todo.todo_is_completed? 'Завершена': 'В работе'}              
+            </td>
         </tr>
     )
 }
 
-const ToDoList = ({todos, users}) => {    
+const ToDoList = ({todos, users, completedChange}) => {    
 
     return (
         <table className='table'>
+            <th>                
+            </th>
             <th>
                 Дата
             </th>
@@ -60,8 +63,9 @@ const ToDoList = ({todos, users}) => {
             </th>  
             <th>
                 Статус
-            </th>            
-            {todos.map((todo) => <ToDoItem todo={todo} users={users}/>)}
+            </th>
+            
+            {todos.map((todo) => <ToDoItem todo={todo} users={users} completedChange={completedChange}/>)}
         </table>
     )
 }

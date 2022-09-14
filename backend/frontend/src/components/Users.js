@@ -1,6 +1,6 @@
 import React from 'react'
 
-const UserItem = ({user}) => {
+const UserItem = ({user, deleteUser, completedChange}) => {
     return (
         <tr>
             <td>
@@ -16,19 +16,21 @@ const UserItem = ({user}) => {
                 {user.email}
             </td>
             <td>
-                {/* <input type="checkbox" checked={user.is_active} /> {user.is_active? 'Активен': 'Не активен'} */}
                 <div>
-                    <input type="checkbox" checked={user.is_superuser} /> Администратор
+                    <input type="checkbox" name="is_superuser" checked={user.is_superuser} onChange={(e) => completedChange('users', user.id, e)}/> Администратор
                 </div>
                 <div>
-                    <input type="checkbox" checked={user.is_staff} /> Персонал
+                    <input type="checkbox" name="is_staff" checked={user.is_staff} onChange={(e) => completedChange('users', user.id, e)}/> Персонал
                 </div>
+            </td>
+            <td>
+                <button onClick={() => deleteUser(user.id)}>Удалить</button>
             </td>
         </tr>
     )
 }
 
-const UserList = ({users}) => {
+const UserList = ({users, deleteUser, completedChange}) => {
     return (
         <table className='table'>
             <th>
@@ -46,7 +48,9 @@ const UserList = ({users}) => {
             <th>
                 Статус
             </th>
-            {users.map((user) => <UserItem user={user} />)}
+            <th>                
+            </th>            
+            {users.map((user) => <UserItem user={user} deleteUser={deleteUser} completedChange={completedChange}/>)}
         </table>
     )
 }
