@@ -26,7 +26,7 @@ class User(models.Model):
     )
     is_active = models.BooleanField(
         ("Активировать пользователя"),
-        default=True,
+        default=False,
     )
     is_superuser = models.BooleanField(
         ("Администратор"),
