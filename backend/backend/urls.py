@@ -45,4 +45,5 @@ urlpatterns = [
     path('create_users', TemplateView.as_view(template_name='index.html')),
     path('create_projects', TemplateView.as_view(template_name='index.html')),
     path('create_todos', TemplateView.as_view(template_name='index.html')),
+    path('login', TemplateView.as_view(template_name='index.html')),
 ]

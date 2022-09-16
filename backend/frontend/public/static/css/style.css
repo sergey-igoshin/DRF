@@ -107,14 +107,21 @@ nav li:hover > .submenu {
   opacity: 1;
 }
 
-form button{
+button{
 	background: #413F3C;
-	width: 250px;
 	height: 40px;
 	border: 0;
 	color: #ddbe86;
 	font-size: 12px;
 	text-transform: uppercase;
+}
+
+form button{
+  width: 250px;
+}
+
+.table button{
+  width: 100px;
 }
 
 form input[type="text"],
@@ -132,4 +139,8 @@ select {
 }
 select.errors {
   border: 1px solid red;
+}
+
+.table th:last-child, .table tr td:last-child{
+  width: 110px;
 }
