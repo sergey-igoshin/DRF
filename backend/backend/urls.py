@@ -5,6 +5,7 @@ from todo.views import *
 from drf_yasg.views import get_schema_view
 from drf_yasg.openapi import Info, License, Contact
 from graphene_django.views import GraphQLView
+from django.views.generic.base import TemplateView
 
 schema_view = get_schema_view(
     Info(
@@ -37,4 +38,12 @@ urlpatterns = [
     path('swagger', schema_view.with_ui()),
     re_path(r'swagger(?P<format>\.json|\.yaml)', schema_view.without_ui()),
     path("graphql/", GraphQLView.as_view(graphiql=True)),
+    path('', TemplateView.as_view(template_name='index.html')),
+    path('users', TemplateView.as_view(template_name='index.html')),
+    path('projects', TemplateView.as_view(template_name='index.html')),
+    path('todos', TemplateView.as_view(template_name='index.html')),
+    path('create_users', TemplateView.as_view(template_name='index.html')),
+    path('create_projects', TemplateView.as_view(template_name='index.html')),
+    path('create_todos', TemplateView.as_view(template_name='index.html')),
+    path('login', TemplateView.as_view(template_name='index.html')),
 ]

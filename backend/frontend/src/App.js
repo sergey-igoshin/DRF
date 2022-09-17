@@ -36,7 +36,7 @@ class App extends React.Component {
     }
   } 
 
-  url = 'http://127.0.0.1:8000/api/'
+  url = '/api/'
 
   deleteUser(userId){
     let headers = this.getHeaders();    
@@ -79,7 +79,7 @@ class App extends React.Component {
   obtainAuthToken(username, password){
     axios
       .post(
-        'http://127.0.0.1:8000/api-auth-token/', {
+        '/api-auth-token/', {
           'username': username,
           'password': password,
         })
@@ -120,7 +120,7 @@ class App extends React.Component {
   getData(){
     let headers = this.getHeaders()
 
-    axios.get('http://127.0.0.1:8000/api/users', {'headers': headers})
+    axios.get('/api/users', {'headers': headers})
     .then(response => {
       const users = response.data
       this.setState(
@@ -135,7 +135,7 @@ class App extends React.Component {
       })
     })    
 
-    axios.get('http://127.0.0.1:8000/api/projects', {'headers': headers})
+    axios.get('/api/projects', {'headers': headers})
     .then(response => {
       const projects = response.data.results
       this.setState(
@@ -150,7 +150,7 @@ class App extends React.Component {
       })
     })  
 
-    axios.get('http://127.0.0.1:8000/api/todos', {'headers': headers})
+    axios.get('/api/todos', {'headers': headers})
     .then(response => {
       const todos = response.data.results
       this.setState(
@@ -185,14 +185,14 @@ class App extends React.Component {
             {this.isAuth() ?<li> <Link to='/users'>Пользователи</Link> </li> : ''}
             {this.isAuth() ?<li> <Link to='/todos'>Задачи</Link> </li> : ''}
             {this.isAuth() ?<li> <Link to='/projects'>Проекты</Link> </li> : ''}
-            {this.isAuth() ?<li><a href="" className="active">Создать<span className="fa fa-angle-down"></span></a>
+            {this.isAuth() ?<li><a href="" className="active">Создать</a>
               <ul class="submenu">
                 <li><Link to='/create_users'>Создать пользователя</Link></li>
                 <li><Link to='/create_projects'>Создать проект</Link></li>
                 <li><Link to='/create_todos'>Создать задачу</Link></li>
               </ul>
             </li> : ''}
-            <li class="right"> {this.isAuth() ? <button onClick={() => this.logout()}>Выйти</button> : <Link to='/login'>Вход</Link>} </li>
+            <li class="right"> {this.isAuth() ? <Link to='/login' onClick={() => this.logout()}>Выйти</Link> : <Link to='/login'>Вход</Link>} </li>
           </ul>
           </nav>
           
